@@ -1,0 +1,9 @@
+splunk:
+  container_name: splunk
+  image: alexk7898/splunklight
+  ports:
+    - "8000:8000"
+  environment:
+    - SPLUNK_START_ARGS=--accept-license --answer-yes --no-prompt
+    - SPLUNK_ENABLE_LISTEN=9997
+  
