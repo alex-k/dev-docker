@@ -1,9 +1,20 @@
+vsplunk:
+  image: busybox
+  volumes:
+    - /opt/splunk/etc
+    - /opt/splunk/var
 splunk:
   container_name: splunk
+  hostname: splunk
   image: alexk7898/splunklight
+  volumes_from:
+    - vsplunk
   ports:
-    - "8000:8000"
+    - 8000:8000
+    - 8088:8088
+    - 8089:8089
+    - 9997:9997
+  restart: always
   environment:
     - SPLUNK_START_ARGS=--accept-license --answer-yes --no-prompt
     - SPLUNK_ENABLE_LISTEN=9997
-  
