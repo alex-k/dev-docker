@@ -14,7 +14,15 @@ splunk:
     - 8088:8088
     - 8089:8089
     - 9997:9997
+    - 1514:1514
+    - 55555:55555
   restart: always
   environment:
     - SPLUNK_START_ARGS=--accept-license --answer-yes --no-prompt
-    - SPLUNK_ENABLE_LISTEN=9997
+logspout:
+  container_name: logspout
+  hostname: logspout
+  image: gliderlabs/logspout
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+  command: tcp://192.168.99.100:55555
